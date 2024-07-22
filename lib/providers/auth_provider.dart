@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:portify/models/user_model.dart';
 import 'package:portify/services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider with ChangeNotifier {
   User? _user;
   bool _isLoading = false;
-
+  bool _isAuthenticated = false;
   User? get user => _user;
   bool get isLoading => _isLoading;
   bool get isAuthenticated => _user != null;
@@ -21,6 +22,8 @@ class AuthProvider with ChangeNotifier {
         return null;
       } else {
         print('Login successful Auth Provider 22: $_user');
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isAuthenticated', true);
         return _user;
       }
     } catch (e) {
@@ -31,9 +34,23 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  void logout() {
+  Future<void> logout() async {
     _user = null;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isAuthenticated', false);
     print('User logged out');
+    notifyListeners();
+  }
+
+  //FOr Chnage Notifier
+  Future<void> checkAuthStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userId = prefs.getString('userId');
+    if (user != null) {
+      _isAuthenticated = true;
+    } else {
+      _isAuthenticated = false;
+    }
     notifyListeners();
   }
 

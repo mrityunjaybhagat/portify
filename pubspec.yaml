@@ -40,6 +40,19 @@ dependencies:
   intl: ^0.19.0
   http: ^0.13.4
   provider: ^6.0.2
+  image_picker: ^0.8.4+4
+  google_maps_flutter: ^2.5.3
+  geocoding: ^3.0.0
+  flutter_google_places: ^0.3.0
+  google_maps_webservice: ^0.0.20-nullsafety.5
+  location: ^5.0.3
+  outline_material_icons: ^1.0.0
+  geolocator: ^11.1.0
+  shared_preferences: ^2.2.3
+  connectivity_plus: ^5.0.2
+  #firebase_core: ^2.24.2
+  #firebase_auth: ^4.16.0
+  #cloud_firestore: ^4.14.0
 
 dev_dependencies:
   flutter_test:
@@ -79,6 +92,15 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -93,3 +115,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/images/

@@ -16,8 +16,8 @@ class SubmitButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        primary: AppTheme.primaryColor,
-        onPrimary: AppTheme.secondaryColor,
+        foregroundColor: AppTheme.secondaryColor,
+        backgroundColor: AppTheme.primaryColor,
       ),
       child: Text(text),
     );

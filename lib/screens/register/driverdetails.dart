@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portify/widgets/CustomTextField.dart';
+import 'package:portify/widgets/rounded_icon_button.dart';
 import 'package:portify/widgets/submit_button.dart';
 import '../../app_theme.dart';
 
@@ -19,10 +20,10 @@ class _DriverDetailsFormState extends State<DriverDetailsForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('Driver Details', style: TextStyle(color: AppTheme.textColor)),
+        title: const Text('Driver Details',
+            style: TextStyle(color: AppTheme.textColor)),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppTheme.textColor),
+        iconTheme: const IconThemeData(color: AppTheme.textColor),
       ),
       body: Center(
         child: Padding(
@@ -40,7 +41,9 @@ class _DriverDetailsFormState extends State<DriverDetailsForm> {
               CustomTextField(
                   controller: _incuvalidController,
                   labelText: 'Insurance Expiring Date'),
-              SubmitButton(text: 'Next', onPressed: () {})
+              //SubmitButton(text: 'Next', onPressed: () {})
+              RoundedIconButton(
+                  text: 'Update', leadingIcon: Icons.save, onTap: () {})
             ],
           ),
         ),

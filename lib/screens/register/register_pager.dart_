@@ -1,0 +1,55 @@
+import 'dart:js_util';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:portify/widgets/CustomTextField.dart';
+import 'package:portify/widgets/submit_button.dart';
+
+class RegistrationPage extends StatelessWidget {
+  RegistrationPage({super.key});
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final TextEditingController _fullnameController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _register() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      // Navigate to the next screen after registration
+      // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => NextScreen()));
+    } catch (e) {
+      // Handle registration errors such as weak password, email already in use, etc.
+      print('Registration failed: $e');
+      // Optionally, show a dialog or error message to the user
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          CustomTextField(
+              controller: _fullnameController, labelText: 'Full Name'),
+          CustomTextField(controller: _mobileController, labelText: 'Mobile'),
+          CustomTextField(controller: _emailController, labelText: 'Full Name'),
+          CustomTextField(
+              controller: _passwordController, labelText: 'Passwrod'),
+          SubmitButton(
+              text: 'Register',
+              onPressed: () {
+                _register();
+              })
+        ],
+      ),
+    ));
+  }
+}

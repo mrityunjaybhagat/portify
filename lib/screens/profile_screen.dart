@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portify/screens/avatar_image.dart';
+import 'package:portify/widgets/rounded_icon_button.dart';
 import 'package:provider/provider.dart';
 import 'package:portify/models/user_model.dart';
 import 'package:portify/providers/auth_provider.dart';
-import 'package:portify/widgets/app_drawer.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -11,48 +12,77 @@ class ProfileScreen extends StatelessWidget {
     User? user = Provider.of<AuthProvider>(context).user;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      drawer: AppDrawer(),
+      // appBar: AppBar(
+      //   title: Text('Profile'),
+      // ),
+      //drawer: AppDrawer(),
       body: user != null
           ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: NetworkImage(user.profilePicture),
-                        // Assuming user.profilePicture is a valid URL
-                      ),
-                      SizedBox(height: 20),
-                      Text('Username: ${user.username}'),
-                      Text('Email: ${user.email}'),
-                      Text('Mobile: ${user.mobile}'),
-                      // Add more fields as needed
-                    ],
-                  ),
+                AvatarImage(imageProvider: NetworkImage(user.profilePicture)),
+                Text(
+                  'Username: ${user.username}',
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Call logout method from AuthProvider
-                      Provider.of<AuthProvider>(context, listen: false)
-                          .logout();
-                      // Navigate back to login screen or any other screen after logout
-                      Navigator.pushReplacementNamed(context, '/');
-                    },
-                    child: Text('Logout'),
-                  ),
+                const SizedBox(height: 10),
+                Text(
+                  'Mobile: ${user.mobile}',
+                  style: const TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Email: ${user.email}',
+                  style: const TextStyle(fontSize: 18),
+                ),
+                const SizedBox(height: 20),
+                RoundedIconButton(
+                  text: 'Privacy',
+                  leadingIcon: Icons.person,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/privacy');
+                  },
+                ),
+                const SizedBox(height: 10),
+                RoundedIconButton(
+                  text: 'Help & Support',
+                  leadingIcon: Icons.help,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/help');
+                  },
+                ),
+                const SizedBox(height: 10),
+                RoundedIconButton(
+                  text: 'Change Password',
+                  leadingIcon: Icons.lock,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/help');
+                  },
+                ),
+                const SizedBox(height: 10),
+                RoundedIconButton(
+                  text: 'Settings',
+                  leadingIcon: Icons.settings,
+                  onTap: () {
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+                const SizedBox(height: 10),
+                RoundedIconButton(
+                  text: 'Logout',
+                  leadingIcon: Icons.logout,
+                  onTap: () {
+                    // Call logout method from AuthProvider
+                    Provider.of<AuthProvider>(context, listen: false).logout();
+                    // Navigate back to login screen or any other screen after logout
+                    Navigator.pushReplacementNamed(context, '/');
+                  },
                 ),
               ],
             )
-          : Center(
+          : const Center(
               child: Text(
                   'Loading user data...'), // Handle loading state if necessary
             ),

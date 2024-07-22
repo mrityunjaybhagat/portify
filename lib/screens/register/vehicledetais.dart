@@ -16,14 +16,28 @@ class _VehicleDetailsFormState extends State<VehicleDetailsForm> {
   final TextEditingController _licanceController = TextEditingController();
   final TextEditingController _lvalidController = TextEditingController();
   final TextEditingController _incvalidController = TextEditingController();
+  DateTime? _selectedDate;
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != _selectedDate)
+      setState(() {
+        _selectedDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Vehicle Details',
+        title: const Text('Vehicle Details',
             style: TextStyle(color: AppTheme.textColor)),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppTheme.textColor),
+        iconTheme: const IconThemeData(color: AppTheme.textColor),
       ),
       body: Center(
         child: Padding(
@@ -38,6 +52,12 @@ class _VehicleDetailsFormState extends State<VehicleDetailsForm> {
               CustomTextField(
                   controller: _lvalidController,
                   labelText: 'Licance Valid Date'),
+              Text(
+                _selectedDate == null
+                    ? 'No date selected!'
+                    : 'Selected Date: ${_selectedDate!.toLocal()}'
+                        .split(' ')[0],
+              ),
               CustomTextField(
                   controller: _incvalidController,
                   labelText: 'INsurance Valid Date'),

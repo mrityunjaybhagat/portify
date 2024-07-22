@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "208303106528",
+    "project_id": "portify-495d5",
+    "storage_bucket": "portify-495d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208303106528:android:e13f0c2d0e4273a56fe385",
+        "android_client_info": {
+          "package_name": "com.example.portify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbINah8Vd59EJVuqwvGIH4tev1dU0IVMI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

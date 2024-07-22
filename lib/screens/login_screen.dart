@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portify/widgets/CustomTextField.dart';
+import 'package:portify/widgets/rounded_icon_button.dart';
+import 'package:portify/widgets/submit_button.dart';
 import 'package:provider/provider.dart';
 import 'package:portify/providers/auth_provider.dart';
 import 'package:portify/models/user_model.dart';
@@ -19,7 +21,7 @@ class LoginScreen extends StatelessWidget {
         User? user = await authProvider.login(username, password);
 
         if (user != null) {
-          Navigator.pushReplacementNamed(context, '/profile');
+          Navigator.pushReplacementNamed(context, '/home');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -55,10 +57,15 @@ class LoginScreen extends StatelessWidget {
             CustomTextField(
                 controller: _passwordController, labelText: 'Password'),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _login(context),
-              child: Text('Login'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () => _login(context),
+            //   child: Text('Login'),
+            // ),
+            // SubmitButton(text: 'Login', onPressed: () => _login(context)),
+            RoundedIconButton(
+                text: "Login",
+                leadingIcon: Icons.logout_outlined,
+                onTap: () => _login(context))
           ],
         ),
       ),

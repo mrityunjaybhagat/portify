@@ -21,10 +21,10 @@ class _BankDetailsFormState extends State<BankDetailsForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('Bank Details', style: TextStyle(color: AppTheme.textColor)),
+        title: const Text('Bank Details',
+            style: TextStyle(color: AppTheme.textColor)),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: AppTheme.textColor),
+        iconTheme: const IconThemeData(color: AppTheme.textColor),
       ),
       body: Center(
         child: Padding(
